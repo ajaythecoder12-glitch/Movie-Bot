@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechKing — Movie Bot Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f59e0b;
+    --gold2: #fbbf24;
+    --purple: #7c3aed;
+    --dark: #0a0a14;
+    --dark2: #0f172a;
+    --dark3: #1e293b;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --green: #10b981;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(124,58,237,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245,158,11,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  section, nav, footer { position: relative; z-index: 1; }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    border-bottom: 1px solid rgba(245,158,11,0.15);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,20,0.85);
+  }
+  .nav-logo { font-family: 'Orbitron', monospace; font-weight: 900; font-size: 22px; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  nav a { color: var(--text2); text-decoration: none; font-size: 15px; font-weight: 600; letter-spacing: 1px; transition: color 0.2s; }
+  nav a:hover { color: var(--gold); }
+  .btn-buy-nav { background: var(--gold); color: #000 !important; padding: 8px 22px; border-radius: 6px; font-weight: 700 !important; }
+  .btn-buy-nav:hover { background: var(--gold2) !important; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); color: var(--gold); padding: 6px 18px; border-radius: 100px; font-size: 13px; font-weight: 600; letter-spacing: 2px; margin-bottom: 28px; animation: fadeDown 0.8s ease both; }
+  .hero h1 { font-family: 'Orbitron', monospace; font-size: clamp(42px, 8vw, 90px); font-weight: 900; line-height: 1.05; margin-bottom: 12px; animation: fadeDown 0.8s ease 0.1s both; }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub { font-size: clamp(18px, 3vw, 26px); color: var(--text2); font-weight: 300; letter-spacing: 3px; margin-bottom: 28px; animation: fadeDown 0.8s ease 0.2s both; }
+  .hero-desc { font-size: 18px; color: var(--text2); max-width: 600px; line-height: 1.7; margin-bottom: 48px; animation: fadeDown 0.8s ease 0.3s both; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; animation: fadeDown 0.8s ease 0.4s both; }
+  .btn-primary { background: var(--gold); color: #000; padding: 16px 40px; border-radius: 8px; font-size: 18px; font-weight: 700; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,158,11,0.4); }
+  .btn-secondary { background: transparent; color: var(--text); padding: 16px 40px; border-radius: 8px; font-size: 18px; font-weight: 700; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; text-decoration: none; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+  .price-tag { margin-top: 20px; font-size: 15px; color: var(--text2); animation: fadeDown 0.8s ease 0.5s both; }
+  .price-tag strong { color: var(--green); font-size: 22px; font-family: 'Orbitron', monospace; }
+  .stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; padding: 48px 20px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(15,23,42,0.5); }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Orbitron', monospace; font-size: 36px; font-weight: 700; color: var(--gold); }
+  .stat-label { font-size: 13px; color: var(--text2); letter-spacing: 2px; margin-top: 4px; }
+  .section-title { font-family: 'Orbitron', monospace; font-size: clamp(24px, 4vw, 40px); font-weight: 700; text-align: center; margin-bottom: 12px; }
+  .section-title span { color: var(--gold); }
+  .section-sub { text-align: center; color: var(--text2); font-size: 17px; margin-bottom: 60px; letter-spacing: 1px; }
+  .use-cases { padding: 100px 60px; }
+  .use-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
+  .use-card { background: var(--dark2); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 32px 24px; text-align: center; transition: all 0.3s; }
+  .use-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-4px); }
+  .use-icon { font-size: 40px; margin-bottom: 16px; }
+  .use-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .use-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .features { padding: 100px 60px; background: rgba(15,23,42,0.4); }
+  .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .feat-card { background: var(--dark2); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 28px; display: flex; gap: 18px; align-items: flex-start; transition: all 0.3s; }
+  .feat-card:hover { border-color: rgba(124,58,237,0.4); transform: translateY(-3px); }
+  .feat-icon { font-size: 28px; flex-shrink: 0; width: 52px; height: 52px; background: rgba(245,158,11,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+  .feat-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .feat-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .how-buy { padding: 100px 60px; }
+  .steps-grid { display: flex; flex-direction: column; gap: 20px; max-width: 700px; margin: 0 auto; }
+  .step-row { display: flex; gap: 20px; align-items: flex-start; background: var(--dark2); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 24px; transition: all 0.3s; }
+  .step-row:hover { border-color: rgba(245,158,11,0.3); }
+  .step-num { font-family: 'Orbitron', monospace; font-size: 28px; font-weight: 900; color: var(--gold); flex-shrink: 0; width: 48px; }
+  .step-content h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .step-content p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .tip { display: inline-block; margin-top: 8px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: var(--green); padding: 3px 10px; border-radius: 100px; font-size: 12px; }
+  .price-box { display: inline-block; background: var(--dark2); border: 1px solid rgba(245,158,11,0.3); border-radius: 20px; padding: 40px 60px; margin-bottom: 32px; }
+  .price-amount { font-family: 'Orbitron', monospace; font-size: 64px; font-weight: 900; color: var(--gold); line-height: 1; }
+  .price-currency { font-size: 32px; vertical-align: top; margin-top: 8px; display: inline-block; }
+  .price-note { color: var(--text2); font-size: 15px; margin-top: 8px; letter-spacing: 1px; }
+  .price-includes { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+  .price-inc-item { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--text2); }
+  .price-inc-item span { color: var(--green); font-size: 18px; }
+  .how-use { padding: 100px 60px; background: rgba(15,23,42,0.4); }
+  .use-steps { max-width: 800px; margin: 0 auto; }
+  .use-step { display: flex; gap: 24px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .use-step:last-child { border-bottom: none; }
+  .use-step-num { font-family: 'Orbitron', monospace; font-size: 48px; font-weight: 900; color: rgba(245,158,11,0.15); flex-shrink: 0; width: 70px; line-height: 1; }
+  .use-step-content h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+  .use-step-content p { font-size: 15px; color: var(--text2); line-height: 1.8; margin-bottom: 10px; }
+  .warn { display: inline-flex; align-items: center; gap: 6px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); color: var(--gold); padding: 6px 14px; border-radius: 8px; font-size: 13px; margin-top: 4px; }
+  .yt-btn { display: inline-flex; align-items: center; gap: 8px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; margin-top: 10px; transition: all 0.2s; }
+  .yt-btn:hover { background: rgba(239,68,68,0.2); transform: translateY(-1px); }
+  .cta { padding: 120px 60px; text-align: center; }
+  .cta h2 { font-family: 'Orbitron', monospace; font-size: clamp(28px, 5vw, 52px); font-weight: 900; margin-bottom: 16px; }
+  .cta h2 span { color: var(--gold); }
+  .cta p { color: var(--text2); font-size: 18px; margin-bottom: 40px; }
+  footer { padding: 40px 60px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-logo { font-family: 'Orbitron', monospace; font-weight: 900; font-size: 18px; }
+  .footer-logo span { color: var(--gold); }
+  .footer-email { color: var(--text2); font-size: 14px; text-decoration: none; transition: color 0.2s; }
+  .footer-email:hover { color: var(--gold); }
+  .footer-copy { color: var(--text2); font-size: 13px; }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--dark3); border-radius: 3px; }
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 16px; }
+    .use-cases, .features, .how-buy, .how-use, .cta { padding: 60px 20px; }
+    footer { padding: 30px 20px; flex-direction: column; text-align: center; }
+    .price-box { padding: 30px; }
+    .price-amount { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">TECH<span>KING</span></a>
+  <div class="nav-links">
+    <a href="https://youtube.com/@techking185?si=-lQzcHoXNPTRuuYH" target="_blank">▶ YouTube</a>
+    <a href="#features">Features</a>
+    <a href="#how-use">How to Use</a>
+    <a href="https://techproducts.myinstamojo.com/product/movie-bot-pro-by-techking/" target="_blank" rel="noreferrer noopener" class="btn-buy-nav">Buy ₹299</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">👑 TECHKING SOFTWARE</div>
+  <h1>MOVIE<span>BOT</span><br>PRO</h1>
+  <div class="hero-sub">AUTO POST YOUR MOVIES TO INSTAGRAM</div>
+  <p class="hero-desc">Automatically splits any movie or video into 60-second reels and posts them to Instagram — one by one. Click Start Bot whenever you want to post. You are always in full control.</p>
+  <div class="hero-btns">
+    <a href="https://techproducts.myinstamojo.com/product/movie-bot-pro-by-techking/" target="_blank" rel="noreferrer noopener" class="btn-primary">⚡ Buy Now — ₹299</a>
+    <a href="https://youtu.be/NXPe2eiFhP4?si=K4jPCVBp5AlYSd5K" target="_blank" rel="noreferrer noopener" class="btn-secondary">▶ How It Works</a>
+  </div>
+  <div class="price-tag">One time payment &nbsp;·&nbsp; <strong>Free updates forever</strong> &nbsp;·&nbsp; Windows PC</div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">60s</div><div class="stat-label">AUTO CLIP LENGTH</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">AUTO PILOT</div></div>
+  <div class="stat"><div class="stat-num">₹299</div><div class="stat-label">ONE TIME ONLY</div></div>
+</div>
+
+<section class="use-cases">
+  <h2 class="section-title">What Can You <span>Post?</span></h2>
+  <p class="section-sub">Works with any video file — movies, shows, sports, everything</p>
+  <div class="use-grid">
+    <div class="use-card"><div class="use-icon">🎬</div><div class="use-title">Bollywood Movies</div><div class="use-desc">Post full Bollywood films as reels and build a massive page fast</div></div>
+    <div class="use-card"><div class="use-icon">🦸</div><div class="use-title">Cartoon & Anime</div><div class="use-desc">Dragon Ball, Naruto, Doraemon — anime pages grow fast on Instagram</div></div>
+    <div class="use-card"><div class="use-icon">🏏</div><div class="use-title">Cricket Matches</div><div class="use-desc">IPL, World Cup highlights — sports pages get massive engagement</div></div>
+    <div class="use-card"><div class="use-icon">⚽</div><div class="use-title">Football & Sports</div><div class="use-desc">Post match highlights, goals and moments automatically</div></div>
+    <div class="use-card"><div class="use-icon">🎭</div><div class="use-title">Web Series</div><div class="use-desc">Netflix, Prime shows — post episodes as clips for huge following</div></div>
+    <div class="use-card"><div class="use-icon">🎮</div><div class="use-title">Gaming Videos</div><div class="use-desc">Gameplay, highlights, tutorials — gaming pages explode on reels</div></div>
+    <div class="use-card"><div class="use-icon">🎤</div><div class="use-title">Music Concerts</div><div class="use-desc">Live concerts, music videos, award shows auto posted</div></div>
+    <div class="use-card"><div class="use-icon">📺</div><div class="use-title">Any Video File</div><div class="use-desc">MP4, MKV, AVI — any format works. If it plays, it posts</div></div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <h2 class="section-title">Why Choose <span>Movie Bot Pro?</span></h2>
+  <p class="section-sub">Everything you need, nothing you don't</p>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon">🔑</div><div><div class="feat-title">Session ID Login — Safer Method</div><div class="feat-desc">Uses your Instagram Session ID instead of password. Much safer than direct login bots. User is responsible for their own account usage.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">✂️</div><div><div class="feat-title">Auto Splits Any Movie</div><div class="feat-desc">Automatically cuts your movie into perfect 60-second clips with audio intact. Works on any video file.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">💾</div><div><div class="feat-title">Progress Saved Always</div><div class="feat-desc">Close the app anytime. Reopen and it resumes exactly where it stopped. Never lose progress.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">📝</div><div><div class="feat-title">Custom Captions</div><div class="feat-desc">Add multiple captions. App auto-rotates them with part numbers like "Part 1 of 120 🎬".</div></div></div>
+    <div class="feat-card"><div class="feat-icon">📊</div><div><div class="feat-title">Live Progress Logs</div><div class="feat-desc">Watch every step in real time — splitting, uploading, posting. Know exactly what's happening.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">🔄</div><div><div class="feat-title">Free Updates Forever</div><div class="feat-desc">Pay once, get all future updates free. App notifies you automatically when new version is available.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">📦</div><div><div class="feat-title">Fully Standalone</div><div class="feat-desc">No Python, no extra installs needed. Just download and run on any Windows PC.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">🔁</div><div><div class="feat-title">Multiple Accounts</div><div class="feat-desc">Switch Session IDs to manage multiple Instagram accounts. Each account's progress saved separately.</div></div></div>
+  </div>
+</section>
+
+<section class="how-buy" id="buy">
+  <h2 class="section-title">How to <span>Buy</span></h2>
+  <p class="section-sub">Simple 5-step process — takes less than 2 minutes</p>
+  <div class="steps-grid">
+    <div class="step-row"><div class="step-num">01</div><div class="step-content"><h3>Click the Buy Button Below</h3><p>You'll be redirected to our secure Instamojo payment page.</p></div></div>
+    <div class="step-row"><div class="step-num">02</div><div class="step-content"><h3>Enter Your Details</h3><p>Fill in your Name, Phone Number and Email ID on the payment page.</p></div></div>
+    <div class="step-row"><div class="step-num">03</div><div class="step-content"><h3>Click Review & Pay</h3><p>Review your order then click "Make Payment" to proceed.</p></div></div>
+    <div class="step-row"><div class="step-num">04</div><div class="step-content"><h3>Scan & Pay ₹299</h3><p>Select any payment method. Scan & Pay (UPI) is the fastest option.</p><span class="tip">✅ Payment is 100% secure via Instamojo</span></div></div>
+    <div class="step-row"><div class="step-num">05</div><div class="step-content"><h3>Download Your App</h3><p>After payment wait 5 seconds for verification. Thank you message appears — scroll down and install the app!</p><span class="tip">✅ Instant delivery — no waiting</span></div></div>
+  </div>
+  <div style="text-align:center; margin-top: 60px;">
+    <div class="price-box">
+      <div class="price-amount"><span class="price-currency">₹</span>299</div>
+      <div class="price-note">ONE TIME PAYMENT · LIFETIME ACCESS</div>
+      <div class="price-includes">
+        <div class="price-inc-item"><span>✅</span> Movie Bot Pro App</div>
+        <div class="price-inc-item"><span>✅</span> Free updates forever</div>
+        <div class="price-inc-item"><span>✅</span> Works on any Windows PC</div>
+        <div class="price-inc-item"><span>✅</span> Email support included</div>
+      </div>
+    </div>
+    <br>
+    <a href="https://techproducts.myinstamojo.com/product/movie-bot-pro-by-techking/" target="_blank" rel="noreferrer noopener" class="btn-primary" style="font-size:20px; padding: 18px 50px;">⚡ Buy Now for ₹299</a>
+    <p style="color: var(--text2); margin-top: 16px; font-size: 14px;">
+      Any issues? Email: <a href="mailto:techking185@gmail.com" style="color: var(--gold);">techking185@gmail.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://youtu.be/NXPe2eiFhP4?si=K4jPCVBp5AlYSd5K" target="_blank" rel="noreferrer noopener" style="color: #ef4444;">▶ Watch Tutorial</a>
+    </p>
+  </div>
+</section>
+
+<section class="how-use" id="how-use">
+  <h2 class="section-title">How to <span>Use</span></h2>
+  <p class="section-sub">Follow these steps after downloading</p>
+  <div class="use-steps">
+    <div class="use-step">
+      <div class="use-step-num">01</div>
+      <div class="use-step-content">
+        <h3>Create a New Folder & Paste the App</h3>
+        <p>After downloading, create a new folder on your PC. Cut the app (Ctrl+X) and paste it inside (Ctrl+V). Also paste your movie file in the same folder. This keeps everything organised and the app running smoothly.</p>
+        <div class="warn">⚠️ Keep movie and clips inside the folder until all reels are posted</div>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">02</div>
+      <div class="use-step-content">
+        <h3>Open the App & Wait for Setup</h3>
+        <p>Double click <strong>MovieBotPro.exe</strong>. First time only — wait 1-2 minutes for automatic setup. This happens once, never again after that.</p>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">03</div>
+      <div class="use-step-content">
+        <h3>Get Your Session ID</h3>
+        <p>Open Chrome → Login to Instagram → Right click → Inspect → Application tab → Cookies → instagram.com → Find <strong>sessionid</strong> → Copy the value → Paste it in the Session ID field in the app.</p>
+        <a href="https://youtu.be/SEmieR45xFA?si=yBJXWLQpBhF53yr3" class="yt-btn" target="_blank">▶ Watch Video — How to Get Session ID</a>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">04</div>
+      <div class="use-step-content">
+        <h3>Upload Your Movie</h3>
+        <p>Click Browse and select your movie file from the folder. The title auto-fills. You can edit it if needed.</p>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">05</div>
+      <div class="use-step-content">
+        <h3>Add Captions</h3>
+        <p>Add captions in the caption boxes. Use <strong>{part}</strong> and <strong>{total}</strong> as placeholders — app fills them automatically. Example: <em>"Part {part} of {total} 🎬 Don't miss it!"</em><br>Add as many captions as you want — app rotates them one by one.</p>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">06</div>
+      <div class="use-step-content">
+        <h3>Click Start Bot</h3>
+        <p>Click <strong>▶ Start Bot</strong>. The bot logs in via Session ID, splits the movie into 60-second clips and starts posting automatically. Watch the live logs to see every step.</p>
+        <div class="warn">⚠️ Don't delete the movie or clips folder while posting is in progress</div>
+        <a href="https://youtu.be/NXPe2eiFhP4?si=K4jPCVBp5AlYSd5K" class="yt-btn" target="_blank">▶ Watch Full Tutorial Video</a>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">07</div>
+      <div class="use-step-content">
+        <h3>Progress is Always Saved</h3>
+        <p>Close the app anytime — progress saves automatically. Next time click Start Bot and it resumes exactly where it left off. Splitting is done only once ever.</p>
+        <div class="warn">✅ After ALL clips are posted — you can safely delete the clips folder</div>
+        <div class="warn" style="margin-top:8px;">💡 You can also delete clips you don't want to post — just delete them from the clips folder before clicking Start Bot</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Ready to <span>Automate?</span></h2>
+  <p>Start posting movies on Instagram automatically today</p>
+  <a href="https://techproducts.myinstamojo.com/product/movie-bot-pro-by-techking/" target="_blank" rel="noreferrer noopener" class="btn-primary" style="font-size:20px; padding:18px 50px;">👑 Get Movie Bot Pro — ₹299</a>
+</section>
+
+<footer>
+  <div class="footer-logo">TECH<span>KING</span></div>
+  <a href="https://youtube.com/@techking185?si=-lQzcHoXNPTRuuYH" target="_blank" class="footer-email">▶ YouTube: @TechKing185</a>
+  <a href="mailto:techking185@gmail.com" class="footer-email">📧 techking185@gmail.com</a>
+  <div class="footer-copy">© 2026 TechKing. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
