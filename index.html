@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Bot Pro — Auto Post Movies to Instagram | TechKing</title>
+<meta name="description" content="Automatically split any movie and post it to Instagram as reels. No password needed. One time ₹299. Windows PC only.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#f59e0b;--gold2:#fbbf24;--purple:#7c3aed;--dark:#08080f;--dark2:#0f172a;--dark3:#1e293b;--text:#f1f5f9;--text2:#94a3b8;--text3:#475569;--green:#10b981;--red:#ef4444;--blue:#60a5fa;--border:rgba(255,255,255,0.07);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,0.07),transparent 60%),radial-gradient(ellipse 60% 40% at 80% 90%,rgba(245,158,11,0.05),transparent 60%);pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(124,58,237,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+section,nav,footer{position:relative;z-index:1;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 60px;border-bottom:1px solid rgba(245,158,11,0.12);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;background:rgba(8,8,15,0.9);}
+.nav-logo{font-family:'Orbitron',monospace;font-weight:900;font-size:20px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:26px;align-items:center;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:14px;font-weight:600;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.btn-nav{background:var(--gold);color:#000;padding:9px 22px;border-radius:8px;font-weight:800;font-size:14px;border:none;cursor:pointer;transition:all .2s;}
+.btn-nav:hover{background:var(--gold2);transform:translateY(-1px);}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 20px 60px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:var(--gold);padding:6px 18px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:2px;margin-bottom:24px;animation:fadeUp .8s ease both;}
+.hero h1{font-family:'Orbitron',monospace;font-size:clamp(38px,7vw,82px);font-weight:900;line-height:1.05;margin-bottom:10px;animation:fadeUp .8s ease .1s both;}
+.hero h1 span{color:var(--gold);}
+.hero-sub{font-size:clamp(15px,2.5vw,21px);color:var(--text2);font-weight:300;letter-spacing:2px;margin-bottom:20px;animation:fadeUp .8s ease .2s both;}
+.hero-desc{font-size:16px;color:var(--text2);max-width:560px;line-height:1.8;margin-bottom:40px;animation:fadeUp .8s ease .3s both;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s ease .4s both;}
+.btn-primary{background:var(--gold);color:#000;padding:16px 38px;border-radius:10px;font-size:17px;font-weight:800;font-family:'Manrope',sans-serif;text-decoration:none;transition:all .2s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,158,11,0.4);}
+.btn-secondary{background:transparent;color:var(--text);padding:16px 38px;border-radius:10px;font-size:17px;font-weight:700;font-family:'Manrope',sans-serif;text-decoration:none;transition:all .2s;border:1px solid rgba(255,255,255,0.15);cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+.hero-note{margin-top:20px;font-size:14px;color:var(--text3);animation:fadeUp .8s ease .5s both;}
+.hero-note strong{color:var(--green);font-size:17px;}
+.trust-bar{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;padding:28px 20px;background:rgba(15,23,42,0.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);font-weight:600;}
+.trust-item span{color:var(--green);font-size:15px;}
+.section-title{font-family:'Orbitron',monospace;font-size:clamp(22px,3.5vw,36px);font-weight:700;text-align:center;margin-bottom:10px;}
+.section-title span{color:var(--gold);}
+.section-sub{text-align:center;color:var(--text2);font-size:15px;margin-bottom:48px;}
+.demo-section{padding:80px 60px;text-align:center;}
+.video-wrapper{max-width:800px;margin:36px auto 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.video-wrapper iframe{width:100%;aspect-ratio:16/9;display:block;}
+.screenshots{padding:80px 60px;background:rgba(15,23,42,0.4);}
+.ss-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;max-width:1100px;margin:0 auto;}
+.ss-card{background:var(--dark2);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all .3s;}
+.ss-card:hover{border-color:rgba(245,158,11,0.3);transform:translateY(-4px);}
+.ss-icon{font-size:34px;margin-bottom:12px;}
+.ss-title{font-size:15px;font-weight:700;margin-bottom:7px;}
+.ss-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+.use-cases{padding:80px 60px;}
+.use-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px;max-width:1100px;margin:0 auto;}
+.use-card{background:var(--dark2);border:1px solid var(--border);border-radius:14px;padding:26px 18px;text-align:center;transition:all .3s;}
+.use-card:hover{border-color:rgba(245,158,11,0.3);transform:translateY(-4px);}
+.use-icon{font-size:36px;margin-bottom:12px;}
+.use-title{font-size:14px;font-weight:700;margin-bottom:5px;}
+.use-desc{font-size:12px;color:var(--text2);line-height:1.6;}
+.features{padding:80px 60px;background:rgba(15,23,42,0.4);}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;max-width:1100px;margin:0 auto;}
+.feat-card{background:var(--dark2);border:1px solid var(--border);border-radius:14px;padding:24px;display:flex;gap:14px;align-items:flex-start;transition:all .3s;}
+.feat-card:hover{border-color:rgba(124,58,237,0.4);transform:translateY(-3px);}
+.feat-icon{font-size:24px;flex-shrink:0;width:48px;height:48px;background:rgba(245,158,11,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.feat-title{font-size:14px;font-weight:700;margin-bottom:5px;}
+.feat-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+.pricing{padding:80px 60px;text-align:center;}
+.price-card{display:inline-block;background:var(--dark2);border:1px solid rgba(245,158,11,0.35);border-radius:24px;padding:48px 52px;max-width:460px;width:90%;position:relative;overflow:hidden;}
+.price-card::before{content:'BEST VALUE';position:absolute;top:20px;right:-28px;background:var(--gold);color:#000;font-size:11px;font-weight:800;padding:4px 40px;transform:rotate(45deg);letter-spacing:1px;}
+.price-label{font-size:12px;color:var(--text2);letter-spacing:2px;margin-bottom:10px;}
+.price-amount{font-family:'Orbitron',monospace;font-size:70px;font-weight:900;color:var(--gold);line-height:1;}
+.price-currency{font-size:34px;vertical-align:top;margin-top:10px;display:inline-block;}
+.price-period{color:var(--text2);font-size:14px;margin:8px 0 24px;letter-spacing:1px;}
+.price-divider{height:1px;background:var(--border);margin:18px 0;}
+.price-features{text-align:left;margin-bottom:28px;}
+.price-feat{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2);margin-bottom:10px;}
+.price-feat span{color:var(--green);font-size:16px;flex-shrink:0;}
+.how-buy{padding:80px 60px;background:rgba(15,23,42,0.4);}
+.steps-list{display:flex;flex-direction:column;gap:14px;max-width:660px;margin:0 auto;}
+.step-row{display:flex;gap:16px;align-items:flex-start;background:var(--dark2);border:1px solid var(--border);border-radius:14px;padding:20px;transition:all .3s;}
+.step-row:hover{border-color:rgba(245,158,11,0.3);}
+.step-num{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--gold);flex-shrink:0;width:42px;}
+.step-content h3{font-size:15px;font-weight:700;margin-bottom:4px;}
+.step-content p{font-size:13px;color:var(--text2);line-height:1.6;}
+.tip{display:inline-block;margin-top:6px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:var(--green);padding:3px 10px;border-radius:100px;font-size:12px;}
+.how-use{padding:80px 60px;}
+.use-steps{max-width:760px;margin:0 auto;}
+.use-step{display:flex;gap:20px;padding:26px 0;border-bottom:1px solid var(--border);}
+.use-step:last-child{border-bottom:none;}
+.use-step-num{font-family:'Orbitron',monospace;font-size:42px;font-weight:900;color:rgba(245,158,11,0.12);flex-shrink:0;width:66px;line-height:1;}
+.use-step-content h3{font-size:18px;font-weight:700;margin-bottom:7px;}
+.use-step-content p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:7px;}
+.warn{display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.18);color:var(--gold);padding:6px 12px;border-radius:8px;font-size:12px;margin-top:4px;}
+.yt-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;margin-top:8px;transition:all .2s;}
+.yt-btn:hover{background:rgba(239,68,68,0.2);}
+.faq{padding:80px 60px;background:rgba(15,23,42,0.4);}
+.faq-list{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
+.faq-item{background:var(--dark2);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.faq-q{width:100%;background:none;border:none;color:var(--text);font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;padding:18px 22px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color .2s;}
+.faq-q:hover{color:var(--gold);}
+.faq-arrow{color:var(--gold);font-size:16px;transition:transform .3s;flex-shrink:0;}
+.faq-a{font-size:13px;color:var(--text2);line-height:1.8;padding:0 22px 18px;display:none;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.creator-portal{padding:80px 60px;}
+.portal-card{max-width:480px;margin:36px auto 0;background:var(--dark2);border:1px solid rgba(245,158,11,0.25);border-radius:18px;padding:32px;}
+.portal-input{width:100%;background:var(--dark3);border:1px solid var(--border);border-radius:10px;padding:13px 16px;color:var(--text);font-size:15px;font-family:'Manrope',sans-serif;outline:none;text-align:center;letter-spacing:2px;margin-bottom:10px;}
+.portal-input:focus{border-color:var(--gold);}
+.portal-btn{width:100%;background:var(--gold);color:#000;padding:13px;border-radius:10px;font-size:15px;font-weight:800;font-family:'Manrope',sans-serif;border:none;cursor:pointer;margin-bottom:14px;transition:all .2s;}
+.portal-btn:hover{background:var(--gold2);}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.stat-box{background:var(--dark);border-radius:10px;padding:14px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:24px;font-weight:700;}
+.stat-lbl{color:var(--text2);font-size:11px;letter-spacing:1px;margin-top:2px;}
+.cta{padding:100px 60px;text-align:center;}
+.cta h2{font-family:'Orbitron',monospace;font-size:clamp(24px,5vw,46px);font-weight:900;margin-bottom:14px;}
+.cta h2 span{color:var(--gold);}
+.cta p{color:var(--text2);font-size:16px;margin-bottom:34px;}
+footer{padding:32px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.footer-logo{font-family:'Orbitron',monospace;font-weight:900;font-size:16px;}
+.footer-logo span{color:var(--gold);}
+.footer-links{display:flex;gap:22px;flex-wrap:wrap;}
+.footer-links a{color:var(--text2);text-decoration:none;font-size:13px;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{color:var(--text3);font-size:12px;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:999;align-items:center;justify-content:center;}
+.modal-overlay.active{display:flex;}
+.modal{background:var(--dark2);border:1px solid rgba(245,158,11,0.3);border-radius:22px;padding:38px;max-width:430px;width:92%;text-align:center;position:relative;}
+.modal h3{font-family:'Orbitron',monospace;font-size:19px;font-weight:900;color:var(--gold);margin-bottom:7px;}
+.modal p{color:var(--text2);font-size:14px;margin-bottom:18px;line-height:1.6;}
+.modal-input{width:100%;background:var(--dark3);border:1px solid var(--border);border-radius:10px;padding:13px 16px;color:var(--text);font-size:15px;font-family:'Manrope',sans-serif;outline:none;margin-bottom:7px;text-align:center;letter-spacing:2px;}
+.modal-input:focus{border-color:var(--gold);}
+.modal-note{font-size:12px;color:var(--text3);margin-bottom:16px;line-height:1.6;}
+.btn-apply{width:100%;background:var(--gold);color:#000;padding:13px;border-radius:10px;font-size:15px;font-weight:800;font-family:'Manrope',sans-serif;border:none;cursor:pointer;margin-bottom:9px;transition:all .2s;}
+.btn-apply:hover{background:var(--gold2);}
+.btn-skip{width:100%;background:transparent;color:var(--text2);padding:10px;border-radius:10px;font-size:13px;font-family:'Manrope',sans-serif;border:1px solid var(--border);cursor:pointer;transition:all .2s;}
+.btn-skip:hover{border-color:rgba(255,255,255,0.3);color:var(--text);}
+.modal-close{position:absolute;top:13px;right:17px;color:var(--text2);font-size:17px;cursor:pointer;background:none;border:none;}
+.ref-perks{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:10px;padding:12px;margin-bottom:16px;text-align:left;}
+.ref-perks p{color:var(--green);font-size:13px;margin-bottom:3px;}
+.ref-perks p:last-child{margin-bottom:0;}
+.ty-overlay{display:none;position:fixed;inset:0;background:rgba(8,8,15,0.97);z-index:9999;align-items:center;justify-content:center;padding:20px;}
+.ty-overlay.active{display:flex;}
+.ty-card{background:var(--dark2);border:1px solid rgba(16,185,129,0.3);border-radius:24px;padding:44px 38px;max-width:500px;width:100%;text-align:center;}
+.ty-icon{font-size:58px;margin-bottom:14px;animation:pop .6s cubic-bezier(.16,1,.3,1) both;}
+@keyframes pop{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
+.ty-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:var(--green);padding:5px 16px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:2px;margin-bottom:16px;}
+.ty-card h2{font-family:'Orbitron',monospace;font-size:26px;font-weight:900;margin-bottom:8px;}
+.ty-card h2 span{color:var(--gold);}
+.ty-card>p{color:var(--text2);font-size:14px;line-height:1.7;margin-bottom:24px;}
+.ty-steps{background:var(--dark3);border-radius:12px;padding:16px 18px;text-align:left;margin-bottom:22px;}
+.ty-step{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;}
+.ty-step:last-child{margin-bottom:0;}
+.ty-step-num{background:rgba(245,158,11,0.15);color:var(--gold);font-weight:800;font-size:11px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ty-step p{color:var(--text2);font-size:13px;line-height:1.6;margin:0;}
+.btn-download{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--gold);color:#000;padding:17px;border-radius:12px;font-size:16px;font-weight:800;font-family:'Manrope',sans-serif;text-decoration:none;border:none;cursor:pointer;transition:all .2s;margin-bottom:9px;}
+.btn-download:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,158,11,0.35);}
+.btn-yt{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;background:transparent;color:var(--text2);padding:12px;border-radius:12px;font-size:13px;font-family:'Manrope',sans-serif;text-decoration:none;border:1px solid var(--border);transition:all .2s;}
+.btn-yt:hover{border-color:#ef4444;color:#ef4444;}
+.ty-ref{margin-top:18px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.18);border-radius:10px;padding:11px 14px;font-size:13px;color:var(--text2);}
+.ty-ref strong{color:var(--gold);font-family:'Orbitron',monospace;}
+.ty-support{margin-top:12px;font-size:12px;color:var(--text3);}
+.ty-support a{color:var(--gold);text-decoration:none;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:var(--dark3);border-radius:3px;}
+@media(max-width:768px){nav{padding:14px 20px;}.nav-links{gap:14px;}.demo-section,.screenshots,.use-cases,.features,.pricing,.how-buy,.how-use,.faq,.creator-portal,.cta{padding:60px 20px;}footer{padding:26px 20px;flex-direction:column;text-align:center;}.price-card{padding:32px 24px;}.price-amount{font-size:54px;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">TECH<span>KING</span></a>
+  <div class="nav-links">
+    <a href="https://youtube.com/@techking185" target="_blank">▶ YouTube</a>
+    <a href="#features">Features</a>
+    <a href="#faq">FAQ</a>
+    <a href="#how-use">How to Use</a>
+    <button onclick="openModal()" class="btn-nav">Buy ₹299</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">👑 TECHKING SOFTWARE — WINDOWS PC ONLY</div>
+  <h1>MOVIE<span>BOT</span><br>PRO</h1>
+  <div class="hero-sub">INSTAGRAM REEL AUTOMATION TOOL</div>
+  <p class="hero-desc">Select any movie. Click Start. Watch your Instagram page fill up with reels automatically — no manual work, no password needed, no monthly fees.</p>
+  <div class="hero-btns">
+    <button onclick="openModal()" class="btn-primary">⚡ Get Started — ₹299</button>
+    <a href="https://www.youtube.com/watch?v=1PtxFeeObsg" target="_blank" class="btn-secondary">▶ Watch Demo</a>
+  </div>
+  <div class="hero-note">One time payment &nbsp;·&nbsp; <strong>Free updates forever</strong> &nbsp;·&nbsp; Windows PC only</div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item"><span>🔑</span> No Password Login</div>
+  <div class="trust-item"><span>🔄</span> Lifetime Free Updates</div>
+  <div class="trust-item"><span>📦</span> Standalone EXE — No Installs</div>
+  <div class="trust-item"><span>🔒</span> Hardware Lock Protection</div>
+  <div class="trust-item"><span>💾</span> Progress Always Saved</div>
+  <div class="trust-item"><span>⚠️</span> Windows PC Only</div>
+</div>
+
+<section class="demo-section" id="demo">
+  <h2 class="section-title">See It In <span>Action</span></h2>
+  <p class="section-sub">Watch Movie Bot Pro post a full movie to Instagram automatically</p>
+  <div class="video-wrapper">
+    <a href="https://www.youtube.com/watch?v=1PtxFeeObsg" target="_blank" style="display:block;max-width:800px;margin:36px auto 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.5);position:relative;cursor:pointer;">
+      <img src="https://img.youtube.com/vi/1PtxFeeObsg/maxresdefault.jpg" alt="Movie Bot Pro Demo" style="width:100%;display:block;">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);">
+        <div style="width:80px;height:80px;background:rgba(255,0,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .2s;">
+          <div style="width:0;height:0;border-top:20px solid transparent;border-bottom:20px solid transparent;border-left:32px solid white;margin-left:6px;"></div>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:white;padding:8px 20px;border-radius:100px;font-size:14px;font-weight:600;white-space:nowrap;">▶ Click to Watch on YouTube</div>
+    </a>
+  </div>
+</section>
+
+<section class="screenshots" id="screenshots">
+  <h2 class="section-title">What's <span>Inside the App</span></h2>
+  <p class="section-sub">A clean, powerful dashboard built for Instagram creators</p>
+  <div class="ss-grid">
+    <div class="ss-card"><div class="ss-icon">🔑</div><div class="ss-title">Session ID Login</div><div class="ss-desc">Paste your Instagram Session ID — no password ever entered. Instagram sees a normal browser session, not a bot.</div></div>
+    <div class="ss-card"><div class="ss-icon">🎬</div><div class="ss-title">Movie Browser</div><div class="ss-desc">Click Browse and select your movie. Title auto-fills. Supports MP4, MKV, AVI — any format that plays on your PC.</div></div>
+    <div class="ss-card"><div class="ss-icon">✏️</div><div class="ss-title">Caption Manager</div><div class="ss-desc">Numbered captions with custom posting order. Use {part} and {total} placeholders for auto-numbering each clip.</div></div>
+    <div class="ss-card"><div class="ss-icon">⏭️</div><div class="ss-title">Skip Intro</div><div class="ss-desc">One checkbox to auto-detect and skip silent or blank intro clips. Your page starts from where the story begins.</div></div>
+    <div class="ss-card"><div class="ss-icon">📊</div><div class="ss-title">Live Log Console</div><div class="ss-desc">Every step shown in real time — login, splitting, uploading, posting. You always know exactly what the app is doing.</div></div>
+    <div class="ss-card"><div class="ss-icon">👥</div><div class="ss-title">Multi-Account Support</div><div class="ss-desc">Switch Session IDs to manage multiple accounts. Separate progress saved for each account and movie combination.</div></div>
+  </div>
+</section>
+
+<section class="use-cases">
+  <h2 class="section-title">What Can You <span>Post?</span></h2>
+  <p class="section-sub">Works with any video file — if it plays on your PC, it posts to Instagram</p>
+  <div class="use-grid">
+    <div class="use-card"><div class="use-icon">🎬</div><div class="use-title">Bollywood Movies</div><div class="use-desc">Post full films as reels and build a massive page fast</div></div>
+    <div class="use-card"><div class="use-icon">🦸</div><div class="use-title">Cartoon & Anime</div><div class="use-desc">Dragon Ball, Naruto — anime pages grow fast on Instagram</div></div>
+    <div class="use-card"><div class="use-icon">🏏</div><div class="use-title">Cricket Highlights</div><div class="use-desc">IPL, World Cup — sports pages get massive engagement</div></div>
+    <div class="use-card"><div class="use-icon">⚽</div><div class="use-title">Football Clips</div><div class="use-desc">Goals, moments, highlights posted automatically</div></div>
+    <div class="use-card"><div class="use-icon">🎭</div><div class="use-title">Web Series</div><div class="use-desc">Post episodes as clips for huge following</div></div>
+    <div class="use-card"><div class="use-icon">🎮</div><div class="use-title">Gaming Videos</div><div class="use-desc">Gameplay and highlights — gaming pages explode on reels</div></div>
+    <div class="use-card"><div class="use-icon">🎤</div><div class="use-title">Music Concerts</div><div class="use-desc">Live concerts, award shows auto posted</div></div>
+    <div class="use-card"><div class="use-icon">📺</div><div class="use-title">Any Video File</div><div class="use-desc">MP4, MKV, AVI — any format that plays on your PC works</div></div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <h2 class="section-title">Why Choose <span>Movie Bot Pro?</span></h2>
+  <p class="section-sub">Built for Instagram creators who want results without the manual work</p>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon">🔑</div><div><div class="feat-title">Session ID — No Ban Risk</div><div class="feat-desc">Uses Session ID instead of password. Instagram sees a normal browser session, not automation.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">✂️</div><div><div class="feat-title">Auto Splits Any Movie</div><div class="feat-desc">Cuts your movie into perfect 60-second clips with full audio. Works on any video format.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">⏭️</div><div><div class="feat-title">Skip Intro Detection</div><div class="feat-desc">Automatically detects and skips silent or blank intro clips. Story starts from the right place.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">📝</div><div><div class="feat-title">Numbered Captions + Order</div><div class="feat-desc">Add numbered captions and control which posts first, second, third. Full control over your content.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">💾</div><div><div class="feat-title">Progress Always Saved</div><div class="feat-desc">Close anytime. Reopen and it resumes exactly where it stopped. No clip ever posts twice.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">👥</div><div><div class="feat-title">Multiple Accounts</div><div class="feat-desc">Switch Session IDs to run multiple movie pages. Each account's progress saved separately.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">🔄</div><div><div class="feat-title">Free Updates Forever</div><div class="feat-desc">Pay once and get every new feature and improvement free. App notifies you when a new version is ready.</div></div></div>
+    <div class="feat-card"><div class="feat-icon">📦</div><div><div class="feat-title">Fully Standalone EXE</div><div class="feat-desc">No Python, no extra installs needed. Just download and run on any Windows PC or laptop.</div></div></div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <h2 class="section-title">Simple <span>Pricing</span></h2>
+  <p class="section-sub">One price. Everything included. Forever.</p>
+  <div class="price-card">
+    <div class="price-label">LIFETIME LICENSE</div>
+    <div class="price-amount"><span class="price-currency">₹</span>299</div>
+    <div class="price-period">ONE TIME · NO SUBSCRIPTION EVER</div>
+    <div class="price-divider"></div>
+    <div class="price-features">
+      <div class="price-feat"><span>✅</span> Movie Bot Pro — Full Version</div>
+      <div class="price-feat"><span>✅</span> Free Updates Forever</div>
+      <div class="price-feat"><span>✅</span> Skip Intro Detection</div>
+      <div class="price-feat"><span>✅</span> Numbered Captions + Order Control</div>
+      <div class="price-feat"><span>✅</span> Multiple Account Support</div>
+      <div class="price-feat"><span>✅</span> Hardware Lock Protection</div>
+      <div class="price-feat"><span>✅</span> Email + WhatsApp Support</div>
+      <div class="price-feat"><span>⚠️</span> Windows PC / Laptop Only</div>
+    </div>
+    <button onclick="openModal()" class="btn-primary" style="width:100%;font-size:17px;padding:17px;justify-content:center;">⚡ Buy Now for ₹299</button>
+    <p style="color:var(--text3);font-size:12px;margin-top:12px;">After payment you will be redirected to download the app instantly ✅</p>
+  </div>
+</section>
+
+<section class="how-buy" id="buy">
+  <h2 class="section-title">How to <span>Buy</span></h2>
+  <p class="section-sub">Takes less than 2 minutes</p>
+  <div class="steps-list">
+    <div class="step-row"><div class="step-num">01</div><div class="step-content"><h3>Click Buy Now</h3><p>You will be redirected to our secure Instamojo payment page.</p></div></div>
+    <div class="step-row"><div class="step-num">02</div><div class="step-content"><h3>Enter Your Details</h3><p>Fill in your Name, Phone Number and Email ID.</p></div></div>
+    <div class="step-row"><div class="step-num">03</div><div class="step-content"><h3>Click Review & Pay</h3><p>Review your order then click Make Payment to proceed.</p></div></div>
+    <div class="step-row"><div class="step-num">04</div><div class="step-content"><h3>Scan & Pay ₹299</h3><p>Select any payment method. UPI Scan & Pay is the fastest option.</p><span class="tip">✅ 100% secure via Instamojo</span></div></div>
+    <div class="step-row"><div class="step-num">05</div><div class="step-content"><h3>Download Instantly</h3><p>After payment wait 5 seconds — you will be automatically redirected to the download page!</p><span class="tip">✅ Instant delivery — no waiting</span></div></div>
+  </div>
+</section>
+
+<section class="how-use" id="how-use">
+  <h2 class="section-title">How to <span>Use</span></h2>
+  <p class="section-sub">Set up in under 5 minutes</p>
+  <div class="use-steps">
+    <div class="use-step">
+      <div class="use-step-num">01</div>
+      <div class="use-step-content">
+        <h3>Create a New Folder & Paste the App</h3>
+        <p>After downloading, create a new folder on your PC. Move the app and your movie file into that folder. This keeps everything organised and ensures the app runs correctly.</p>
+        <div class="warn">⚠️ Keep movie and clips inside the folder until all reels are posted</div>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">02</div>
+      <div class="use-step-content">
+        <h3>Open the App — One Time Setup</h3>
+        <p>Double click MovieBotPro.exe. First launch only — wait 1-2 minutes for automatic setup. This never happens again after that.</p>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">03</div>
+      <div class="use-step-content">
+        <h3>Get Your Session ID</h3>
+        <p>Open Chrome → Login to Instagram → Right click → Inspect → Application tab → Cookies → instagram.com → Find sessionid → Copy the value → Paste in the app.</p>
+        <a href="https://www.youtube.com/watch?v=Y-Vo-hNY9NE" class="yt-btn" target="_blank">▶ Watch — How to Get Session ID</a>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">04</div>
+      <div class="use-step-content">
+        <h3>Select Movie & Add Captions</h3>
+        <p>Click Browse and select your movie file. Add captions in the numbered caption boxes. Set your preferred caption order. Enable Skip Intro if your movie has a blank opening.</p>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">05</div>
+      <div class="use-step-content">
+        <h3>Click Start Bot</h3>
+        <p>Click Start Bot — the app logs in, splits your movie into 60-second clips and uploads them to Instagram automatically. Watch the live logs for real time updates.</p>
+        <div class="warn">⚠️ Don't delete movie or clips folder while posting is in progress</div>
+        <a href="https://www.youtube.com/watch?v=1PtxFeeObsg" class="yt-btn" target="_blank">▶ Watch Full Tutorial</a>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="use-step-num">06</div>
+      <div class="use-step-content">
+        <h3>Progress is Always Saved</h3>
+        <p>Close anytime — progress saves automatically. Reopen and click Start Bot to resume from exactly where it stopped. No clip posts twice.</p>
+        <div class="warn">✅ After all clips posted — safely delete clips folder</div>
+        <div class="warn" style="margin-top:6px;">💡 Delete unwanted clips from clips folder before starting — bot only posts what's left</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+  <p class="section-sub">Everything you need to know before buying</p>
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Will my Instagram account get banned? <span class="faq-arrow">▾</span></button><div class="faq-a">The app uses Session ID login which Instagram sees as a normal browser session. However, posting copyrighted content may lead to content removal. Always add credit in captions and use at your own risk.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does it work on Mac or mobile? <span class="faq-arrow">▾</span></button><div class="faq-a">No — Movie Bot Pro works on Windows PC and Laptop only. Mac, Linux, Android, and iPhone are not supported at this time.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to install Python or anything else? <span class="faq-arrow">▾</span></button><div class="faq-a">No. The app is a fully standalone EXE. No Python, no ffmpeg, no extra installs. First launch downloads one browser component automatically (takes 2 minutes, once only).</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I use it on multiple Instagram accounts? <span class="faq-arrow">▾</span></button><div class="faq-a">Yes! Just switch the Session ID to a different account. The app saves completely separate progress for each account and each movie combination.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens if I close the app midway? <span class="faq-arrow">▾</span></button><div class="faq-a">Progress is saved automatically after every clip. Reopen and click Start Bot — it resumes exactly where it stopped. No clip will ever be posted twice.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are updates free? <span class="faq-arrow">▾</span></button><div class="faq-a">Yes — all future updates are completely free. Pay once and get every new feature and bug fix forever. The app shows a popup automatically when a new version is available.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I share the app with someone else? <span class="faq-arrow">▾</span></button><div class="faq-a">No. The app uses hardware lock — it registers to your specific PC on first launch. Running it on a different PC will not work. Each purchase is for one device only.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What video formats are supported? <span class="faq-arrow">▾</span></button><div class="faq-a">MP4, MKV, and AVI are fully supported. If the file plays on your Windows PC, Movie Bot Pro can split and post it to Instagram.</div></div>
+  </div>
+</section>
+
+<section class="creator-portal" id="creator-portal">
+  <h2 class="section-title">Creator <span>Portal</span></h2>
+  <p class="section-sub">Track your referral sales anytime — fully transparent 👑</p>
+  <div class="portal-card">
+    <div style="font-size:34px;text-align:center;margin-bottom:10px;">📊</div>
+    <p style="color:var(--text2);font-size:14px;text-align:center;margin-bottom:16px;">Enter your referral code to see your live sales stats</p>
+    <input type="text" id="creatorCode" class="portal-input" placeholder="ENTER YOUR CODE" maxlength="20">
+    <button onclick="searchCreator()" class="portal-btn">🔍 Check My Stats</button>
+    <div id="creatorResult" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <span style="color:var(--gold);font-family:'Orbitron',monospace;font-weight:700;font-size:14px;" id="creatorName"></span>
+        <span style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:var(--green);padding:3px 12px;border-radius:100px;font-size:11px;">ACTIVE</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-val" style="color:var(--gold);" id="creatorSales">0</div><div class="stat-lbl">TOTAL SALES</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--green);" id="creatorEarned">₹0</div><div class="stat-lbl">TOTAL EARNED</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--blue);" id="creatorPaid">₹0</div><div class="stat-lbl">PAID</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--red);" id="creatorUnpaid">₹0</div><div class="stat-lbl">PENDING</div></div>
+      </div>
+      <p style="color:var(--text3);font-size:12px;text-align:center;margin-top:10px;">Payment sent every week via GPay/UPI 💰</p>
+    </div>
+    <div id="creatorError" style="display:none;color:var(--red);font-size:13px;text-align:center;margin-top:8px;">❌ Code not found. Check your code and try again.</div>
+  </div>
+  <p style="color:var(--text3);font-size:13px;text-align:center;margin-top:16px;">Want to become a creator partner? Email: <a href="mailto:techking185@gmail.com" style="color:var(--gold);">techking185@gmail.com</a></p>
+</section>
+
+<section class="cta">
+  <h2>Ready to <span>Automate?</span></h2>
+  <p>Join creators posting movies on Instagram automatically</p>
+  <button onclick="openModal()" class="btn-primary" style="font-size:18px;padding:18px 48px;">👑 Get Movie Bot Pro — ₹299</button>
+  <p style="color:var(--text3);font-size:13px;margin-top:14px;">Any issues? <a href="mailto:techking185@gmail.com" style="color:var(--gold);">techking185@gmail.com</a> &nbsp;·&nbsp; <a href="https://youtube.com/@techking185" target="_blank" style="color:#ef4444;">▶ YouTube</a></p>
+</section>
+
+<footer>
+  <div class="footer-logo">TECH<span>KING</span></div>
+  <div class="footer-links">
+    <a href="https://youtube.com/@techking185" target="_blank">▶ YouTube</a>
+    <a href="mailto:techking185@gmail.com">📧 Email Support</a>
+    <a href="#faq">FAQ</a>
+    <a href="#creator-portal">Creator Portal</a>
+  </div>
+  <div class="footer-copy">© 2026 TechKing. All rights reserved.</div>
+</footer>
+
+<!-- BUY MODAL -->
+<div class="modal-overlay" id="buyModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>👑 Almost There!</h3>
+    <p>Have a referral code from a creator?<br>Enter it to unlock exclusive support perks!</p>
+    <div class="ref-perks">
+      <p>✅ Priority email support</p>
+      <p>✅ Direct WhatsApp support from developer</p>
+      <p>✅ Early access to new features</p>
+    </div>
+    <input type="text" class="modal-input" id="refCode" placeholder="ENTER REFERRAL CODE" maxlength="20">
+    <div class="modal-note" id="refNote">No code? No problem! <span style="color:var(--green)">All buyers get the same great app</span> — code just unlocks extra support perks 😊</div>
+    <button class="btn-apply" onclick="applyCode()">✅ Apply Code & Buy</button>
+    <button class="btn-skip" onclick="skipCode()">Continue without code →</button>
+  </div>
+</div>
+
+<!-- THANK YOU OVERLAY -->
+<div class="ty-overlay" id="thankYouOverlay">
+  <div class="ty-card">
+    <div class="ty-icon">🎉</div>
+    <div class="ty-badge">✅ PAYMENT CONFIRMED</div>
+    <h2>Welcome to<br><span>Movie Bot Pro!</span></h2>
+    <p>Your purchase is confirmed. Download your app below and start posting movies to Instagram automatically.</p>
+    <div class="ty-steps">
+      <div class="ty-step"><div class="ty-step-num">1</div><p>Create a new folder → paste app and movie inside it</p></div>
+      <div class="ty-step"><div class="ty-step-num">2</div><p>Double click MovieBotPro.exe → wait 1-2 mins for one-time setup</p></div>
+      <div class="ty-step"><div class="ty-step-num">3</div><p>Paste Session ID → Browse movie → Click Start Bot!</p></div>
+    </div>
+    <a id="tyDownloadBtn" href="https://www.mediafire.com/file/i35ym9zysnvcpfx/MovieBotPro.exe/file" class="btn-download" target="_blank">⬇️ Download Movie Bot Pro</a>
+    <a href="https://www.youtube.com/watch?v=1PtxFeeObsg" class="btn-yt" target="_blank">▶ Watch Setup Tutorial on YouTube</a>
+    <div class="ty-ref" id="tyRefCredit" style="display:none;">🤝 You came via creator code <strong id="tyRefCode"></strong> — thanks for supporting them!</div>
+    <div class="ty-support">Need help? <a href="mailto:techking185@gmail.com">techking185@gmail.com</a></div>
+  </div>
+</div>
+
+<script>
+  const REF_SCRIPT  = "https://script.google.com/macros/s/AKfycbx-UwD8S5AENCzVbpko9yQCGKtmTMsACVmXdyvaeT5fECoDnd-W37OmUle-AtD-1mAh/exec";
+  const defaultLink = "https://techproducts.myinstamojo.com/product/movie-bot-pro-by-techking/";
+
+  function toggleFaq(btn) { btn.parentElement.classList.toggle("open"); }
+
+  function openModal() {
+    document.getElementById("buyModal").classList.add("active");
+    document.getElementById("refCode").value = "";
+    document.getElementById("refCode").style.borderColor = "rgba(255,255,255,0.07)";
+    document.getElementById("refNote").innerHTML = 'No code? No problem! <span style="color:var(--green)">All buyers get the same great app</span> — code just unlocks extra support perks 😊';
+  }
+  function closeModal() { document.getElementById("buyModal").classList.remove("active"); }
+
+  function goToPayment(ref) {
+    const token = "tk_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+    localStorage.setItem("tk_payment_token", token);
+    if (ref) localStorage.setItem("tk_ref", ref);
+    else localStorage.removeItem("tk_ref");
+    window.location.href = defaultLink;
+  }
+
+  async function applyCode() {
+    const code  = document.getElementById("refCode").value.trim().toUpperCase();
+    const entry = document.getElementById("refCode");
+    const note  = document.getElementById("refNote");
+    if (!code) { closeModal(); goToPayment(""); return; }
+    note.innerHTML = "⏳ Verifying code...";
+    try {
+      const res  = await fetch(`${REF_SCRIPT}?action=search&ref=${code}`);
+      const data = await res.json();
+      if (!data.error) {
+        note.innerHTML = "✅ Code verified! Redirecting to payment...";
+        setTimeout(() => { closeModal(); goToPayment(code); }, 900);
+      } else {
+        entry.style.borderColor = "#ef4444";
+        note.innerHTML = "❌ Invalid code — try again or leave empty to skip";
+      }
+    } catch {
+      // Network blocked — accept code and proceed anyway
+      note.innerHTML = "✅ Redirecting to payment...";
+      setTimeout(() => { closeModal(); goToPayment(code); }, 900);
+    }
+  }
+
+  function skipCode() { closeModal(); goToPayment(""); }
+
+  async function searchCreator() {
+    const code   = document.getElementById("creatorCode").value.trim().toUpperCase();
+    const result = document.getElementById("creatorResult");
+    const error  = document.getElementById("creatorError");
+    result.style.display = "none"; error.style.display = "none";
+    if (!code) return;
+    try {
+      const res  = await fetch(`${REF_SCRIPT}?action=search&ref=${code}`);
+      const data = await res.json();
+      if (data.error) { error.style.display = "block"; }
+      else {
+        document.getElementById("creatorName").textContent   = "👑 " + data.name;
+        document.getElementById("creatorSales").textContent  = data.sales;
+        document.getElementById("creatorEarned").textContent = "₹" + data.earned;
+        document.getElementById("creatorPaid").textContent   = "₹" + data.paid;
+        document.getElementById("creatorUnpaid").textContent = "₹" + data.unpaid;
+        result.style.display = "block";
+      }
+    } catch { error.style.display = "block"; }
+  }
+
+  window.addEventListener("DOMContentLoaded", async () => {
+    const params = new URLSearchParams(window.location.search);
+    // ONLY show thank you if Instamojo sent payment_status=Credit
+    // Token alone is NOT enough — must come back from Instamojo
+    if (params.get("payment_status") === "Credit") {
+      localStorage.removeItem("tk_payment_token");
+      showThankYou();
+    } else {
+      // Clear any leftover tokens so page loads normally
+      localStorage.removeItem("tk_payment_token");
+      localStorage.removeItem("tk_ref");
+    }
+  });
+
+  async function showThankYou() {
+    const ref = (localStorage.getItem("tk_ref") || "").toUpperCase().trim();
+    localStorage.removeItem("tk_ref");
+    document.getElementById("thankYouOverlay").classList.add("active");
+    document.body.style.overflow = "hidden";
+    // Download button points to Apps Script redirect — MediaFire link never exposed
+    document.getElementById("tyDownloadBtn").href = `${REF_SCRIPT}?action=download`;
+    if (ref) {
+      document.getElementById("tyRefCredit").style.display = "block";
+      document.getElementById("tyRefCode").textContent = ref;
+      try { await fetch(`${REF_SCRIPT}?action=sale&ref=${ref}`, { mode: "no-cors" }); } catch {}
+    }
+  }
+
+  document.getElementById("buyModal").addEventListener("click", function(e) { if (e.target === this) closeModal(); });
+  document.getElementById("refCode").addEventListener("keypress", function(e) { if (e.key === "Enter") applyCode(); });
+  document.getElementById("creatorCode").addEventListener("keypress", function(e) { if (e.key === "Enter") searchCreator(); });
+</script>
+</body>
+</html>
